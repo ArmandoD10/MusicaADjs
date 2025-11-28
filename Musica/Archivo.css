@@ -1,0 +1,114 @@
+/* MODO CLARO */
+body {
+    background-color: black;
+}
+
+/* MODO OSCURO */
+.dark body {
+    background-color: black;
+}
+
+:root {
+    --morado: blueviolet;
+}
+
+article {
+    background: transparent !important;
+}
+
+/* transición global desactivada – perfecto así */
+/* * {
+    transition: all 1s ease;
+} */
+
+label {
+    font-weight: 800 !important;
+}
+
+/* Animación pulso suave */
+@keyframes pulse-suave {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.95; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.pulse-suave {
+    animation: pulse-suave 2s ease-in-out infinite;
+}
+
+h2 {
+    color: blueviolet;
+}
+
+h1 {
+    color: aliceblue;
+}
+
+#sidebar {
+    background-color: black;
+    border: solid blueviolet 2px;
+}
+
+.buton:hover {
+    background-color: blueviolet;
+    color: black;
+}
+
+.img {
+    border-color: blueviolet;
+}
+
+.agregar {
+    width: 200px;
+    height: 35px;
+    background-color: blueviolet;
+    text-align: center;
+}
+
+/* 🚨 ESTA CLASE ESTÁ ELIMINADA (ya no se usa) */
+/*
+.tarjeta {
+    border-color: blueviolet !important;
+    border-radius: 10px;
+    border: 3px;
+    width: 250px;
+    height: 250px;
+}
+*/
+
+.hre {
+    color: blueviolet !important;
+    margin-bottom: 20px;
+}
+
+.perspective {
+    /* Define la profundidad 3D para la escena */
+    perspective: 1000px; 
+}
+
+.flipper {
+    /* Mantiene la posición relativa para las caras y permite la animación 3D */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s; /* Velocidad de la animación */
+    transform-style: preserve-3d; /* Esencial para el efecto 3D */
+}
+
+.face {
+    /* Posiciona las caras una encima de la otra y las oculta en 3D */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta la cara cuando está de espaldas */
+}
+
+.back {
+    /* Rota la cara trasera 180 grados inicialmente para que quede "oculta" */
+    transform: rotateY(180deg);
+}
+
+.flipped {
+    /* La clase que se aplica al hacer click para voltear la tarjeta */
+    transform: rotateY(180deg);
+}
