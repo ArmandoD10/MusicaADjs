@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdMusic.com</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="Archivo.css">
+
+</head>
+<body class="text-white min-h-screen">
+
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 transform -translate-x-64 transition-transform duration-300 fixed h-full flex flex-col">
+
+        <!-- User Section -->
+        <div class="p-6 flex flex-col items-center border-b border-gray-700">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="img w-20 h-20 rounded-full border-2" alt="User" />
+            <p class="mt-3 font-semibold">Armando</p>
+            <button id="openModalBtn" class="agregar mt-4 bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-full flex items-center gap-2">
+                <span class="text-xl">+</span> Agregar
+            </button>
+        </div>
+
+        <!-- Menu Options -->
+        <nav class="mt-6 flex flex-col gap-2 p-4">
+            <button class="buton w-full text-left py-2 px-4 rounded">Música</button>
+            <button class="buton w-full text-left py-2 px-4 rounded">Artistas</button>
+            <button class="buton w-full text-left py-2 px-4 rounded">Álbumes</button>
+            <button class="buton w-full text-left py-2 px-4 rounded">Configuración</button>
+        </nav>
+    </aside>
+
+    <!-- Toggle Button -->
+    <button id="toggleBtn" class="absolute top-4 left-4 bg-gray-800 p-2 rounded-md hover:bg-gray-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+    <!-- Dashboard Content -->
+    <main class="flex-1 ml-0 md:ml-64 p-6 transition-all duration-300">
+        <h1 class="text-3xl font-semibold mb-6">Dashboard - AD Music</h1>
+        <hr class="hre">
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+            <!--Card 1-->
+                <!-- Card flip (click) -->
+                <div class="w-48 h-48 perspective">
+                <div class="flipper" tabindex="0" role="button" aria-pressed="false"
+                    onclick="this.classList.toggle('flipped')"
+                    onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); this.classList.toggle('flipped'); }">
+
+                    <!-- FRONT (cara frontal) -->
+                    <div class="face front">
+                    <!-- usa ./img/reinaa.webp si la imagen está en carpeta img junto a tu HTML -->
+                    <img src="./img/reinaa.webp" class="w-full h-full object-cover rounded-xl shadow-lg" alt="Portada">
+                    </div>
+
+                    <!-- BACK (cara trasera) -->
+                    <div class="face back bg-gray-900 text-white rounded-xl p-2 flex flex-col justify-start relative pt-3 shadow-lg">
+                    <h2 class="text-base font-bold mb-2">🎵 ROA, Clarent, Midnvght - REINAA </h2>
+                    <p class="text-xs mb-1"><strong>Artista:</strong> Roa ft Clarent, Midnvght</p>
+                    <p class="text-xs mb-1"><strong>Duración:</strong> 4:31</p>
+                    <p class="text-xs mt-2 opacity-70">© Derechos Reservados ADMusic 2025</p>
+
+                    <button class="absolute bottom-3 right-3 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-xl 
+                        flex items-center justify-center transform transition-transform duration-200 hover:scale-110
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                            <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.348 2.779-1.643l11.386 6.417a1.125 1.125 0 0 1 0 1.966l-11.386 6.417a1.125 1.125 0 0 1-2.779-1.643V5.653Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    </div>
+
+                </div>
+                </div>
+            <!---->
+
+                <!--Card 2-->
+                <!-- Card flip (click) -->
+                <div class="w-48 h-48 perspective">
+                <div class="flipper" tabindex="0" role="button" aria-pressed="false"
+                    onclick="this.classList.toggle('flipped')"
+                    onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); this.classList.toggle('flipped'); }">
+
+                    <!-- FRONT (cara frontal) -->
+                    <div class="face front">
+                    <!-- usa ./img/reinaa.webp si la imagen está en carpeta img junto a tu HTML -->
+                    <img src="./img/eclipse.webp" class="w-full h-full object-cover rounded-xl shadow-lg" alt="Portada">
+                    </div>
+
+                    <!-- BACK (cara trasera) -->
+                    <div class="face back bg-gray-900 text-white rounded-xl p-2 flex flex-col justify-start relative pt-3 shadow-lg">
+                    <h2 class="text-base font-bold mb-2"> 🎵 MIDNVGHT - ECLIPSE </h2>
+                    <p class="text-xs mb-1"><strong>Artista: </strong>Midnvght</p>
+                    <p class="text-xs mb-1"><strong>Duración:</strong> 3:06</p>
+                    <p class="text-xs mt-2 opacity-70">© Derechos Reservados ADMusic 2025</p>
+
+                    <button class="absolute bottom-3 right-3 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-xl 
+                        flex items-center justify-center transform transition-transform duration-200 hover:scale-110
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                            <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.348 2.779-1.643l11.386 6.417a1.125 1.125 0 0 1 0 1.966l-11.386 6.417a1.125 1.125 0 0 1-2.779-1.643V5.653Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    </div>
+
+                </div>
+                </div>
+            <!---->
+        </div>
+    </main>
+
+    <div id="songModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-2xl w-full max-w-md">
+        <h3 class="text-2xl font-bold text-white mb-4">🎵 Añadir Nueva Canción</h3>
+        <form id="newSongForm">
+            
+            <div class="mb-4">
+                <label for="songName" class="block text-sm font-medium text-gray-300">Nombre de la Canción</label>
+                <input type="text" id="songName" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="songartist" class="block text-sm font-medium text-gray-300">Nombre del Artista</label>
+                <input type="text" id="songartist" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="songDuration" class="block text-sm font-medium text-gray-300">Duración (ej: 3:12)</label>
+                <input type="text" id="songDuration" required pattern="\d:\d{2}" title="Formato: m:ss"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none">
+            </div>
+
+            <div class="mb-6">
+                <label for="songImage" class="block text-sm font-medium text-gray-300">Portada del Álbum</label>
+                <input type="file" id="songImage" accept="image/*" required
+                       class="mt-1 block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
+
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="closeModalBtn" 
+                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg">
+                    Cancelar
+                </button>
+                <button type="submit" 
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+                    Guardar Canción
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+    
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const toggleBtn = document.getElementById("toggleBtn");
+
+
+        toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-64");
+        // Ajuste para que el contenido se mueva
+        document.querySelector('main').classList.toggle('ml-64');
+
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('songModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const form = document.getElementById('newSongForm');
+    const cardsGrid = document.querySelector('.grid.lg\\:grid-cols-4'); // Selecciona tu contenedor de tarjetas
+    
+    // --- 1. Control del Modal ---
+    openBtn.onclick = () => { modal.style.display = 'flex'; };
+    closeBtn.onclick = () => { modal.style.display = 'none'; };
+    modal.onclick = (e) => { // Cierra al hacer click fuera
+        if (e.target === modal) modal.style.display = 'none';
+    };
+
+    // --- 2. Cargar tarjetas existentes al inicio ---
+    loadSongs();
+
+    // --- 3. Manejar el envío del formulario ---
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        
+        const songName = document.getElementById('songName').value;
+        const songartist = document.getElementById('songartist').value;
+        const songDuration = document.getElementById('songDuration').value;
+        const songImageFile = document.getElementById('songImage').files[0];
+        
+        if (songImageFile) {
+            // Convierte el archivo de imagen a una URL de datos (Base64)
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const songData = {
+                    name: songName,
+                    artista: songartist,
+                    duration: songDuration,
+                    imageSrc: event.target.result // URL Base64 de la imagen
+                };
+                
+                saveAndRenderSong(songData);
+                modal.style.display = 'none';
+                form.reset();
+            };
+            reader.readAsDataURL(songImageFile);
+        }
+    };
+    
+    // --- 4. Funciones de persistencia y renderizado ---
+
+    function saveAndRenderSong(songData) {
+        // 1. Obtener canciones existentes
+        const songs = JSON.parse(localStorage.getItem('customSongs')) || [];
+        
+        // 2. Añadir la nueva canción y guardar en LocalStorage
+        songs.push(songData);
+        localStorage.setItem('customSongs', JSON.stringify(songs));
+        
+        // 3. Renderizar la nueva tarjeta
+        renderSongCard(songData);
+    }
+
+    function loadSongs() {
+        const songs = JSON.parse(localStorage.getItem('customSongs')) || [];
+        songs.forEach(renderSongCard);
+    }
+    
+    // --- 5. Función para crear el HTML de la tarjeta ---
+    function renderSongCard(song) {
+        // Esta función crea el HTML EXACTAMENTE con la estructura de volteo que tienes.
+        const cardHTML = `
+            <div class="w-48 h-48 perspective">
+                <div class="flipper" tabindex="0" role="button" aria-pressed="false"
+                    onclick="this.classList.toggle('flipped')"
+                    onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); this.classList.toggle('flipped'); }">
+
+                    <div class="face front">
+                        <img src="${song.imageSrc}" class="w-full h-full object-cover rounded-xl shadow-lg" alt="${song.name}">
+                        </div>
+
+                    <div class="face back bg-gray-900 text-white rounded-xl p-2 flex flex-col justify-start relative pt-3 shadow-lg">
+                        <h2 class="text-base font-bold mb-2">🎵 ${song.name}</h2>
+                        <p class="text-xs mb-1"><strong>Artista:</strong> ${song.artista}</p>
+                        <p class="text-xs mb-1"><strong>Duración:</strong> ${song.duration}</p>
+                        <p class="text-xs mt-2 opacity-70">© Derechos Reservados ADMusic 2025</p>
+                        
+                        <button class="absolute bottom-3 right-3 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-xl 
+                               flex items-center justify-center transform transition-transform duration-200 hover:scale-110">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.348 2.779-1.643l11.386 6.417a1.125 1.125 0 0 1 0 1.966l-11.386 6.417a1.125 1.125 0 0 1-2.779-1.643V5.653Z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            `;
+        
+        // Convertir la cadena de HTML en un elemento DOM y agregarlo
+        const newCard = document.createElement('div');
+        newCard.innerHTML = cardHTML.trim();
+        cardsGrid.appendChild(newCard.firstChild);
+    }
+});
+    </script>
+</body>
+</html>
