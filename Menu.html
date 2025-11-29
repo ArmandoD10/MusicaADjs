@@ -282,7 +282,7 @@
         }
 
         const card = document.createElement("div");
-        card.className = "w-full h-64 perspective";
+        card.className = "w-40 h-40 perspective";
 
         card.innerHTML = `
             <div class="flipper" tabindex="0" role="button" 
@@ -294,13 +294,18 @@
                         alt="${cancion.nombre}">
                 </div>
 
-                <div class="face back bg-gray-900 text-white rounded-xl p-4 flex flex-col justify-start relative pt-6 shadow-lg">
+                <div class="face back bg-gray-900 text-white rounded-xl p-2 flex flex-col justify-start relative pt-3 shadow-lg">
                     <h2 class="text-xl font-bold mb-2">🎵 ${cancion.nombre}</h2>
                     <p class="text-sm mb-1"><strong>Artista:</strong> ${cancion.artista}</p>
                     <p class="text-sm mb-1"><strong>Duración:</strong> ${cancion.duracion}</p>
+                    <p class="text-xs mt-2 opacity-70">© Derechos Reservados ADMusic 2025</p>
 
-                    <button class="absolute bottom-3 right-3 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-xl">
-                        ▶
+                    <button class="absolute bottom-3 right-3 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-xl 
+                        flex items-center justify-center transform transition-transform duration-200 hover:scale-110
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                            <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.348 2.779-1.643l11.386 6.417a1.125 1.125 0 0 1 0 1.966l-11.386 6.417a1.125 1.125 0 0 1-2.779-1.643V5.653Z" clip-rule="evenodd" />
+                        </svg>
                     </button>
                 </div>
             </div>
