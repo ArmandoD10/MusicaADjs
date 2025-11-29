@@ -158,7 +158,7 @@
     </div>
 </div>
     
-    <script src="agregarCancion.js"></script>
+    <!-- <script src="agregarCancion.js"></script> -->
 
     <script>
         const sidebar = document.getElementById("sidebar");
@@ -171,6 +171,22 @@
         document.querySelector('main').classList.toggle('ml-64');
 
         });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                const modal = document.getElementById('songModal');
+                const openBtn = document.getElementById('openModalBtn');
+                const closeBtn = document.getElementById('closeModalBtn');
+                const form = document.getElementById('newSongForm');
+                const cardsGrid = document.querySelector('.grid.lg\\:grid-cols-4'); // Selecciona tu contenedor de tarjetas
+                
+                // --- 1. Control del Modal ---
+                openBtn.onclick = () => { modal.style.display = 'flex'; };
+                closeBtn.onclick = () => { modal.style.display = 'none'; };
+                modal.onclick = (e) => { // Cierra al hacer click fuera
+                    if (e.target === modal) modal.style.display = 'none';
+                };
+            });
+
 
     </script>
 </body>
