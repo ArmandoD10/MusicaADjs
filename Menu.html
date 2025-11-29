@@ -159,7 +159,7 @@
 </div>
     
     <!-- <script src="agregarCancion.js"></script> -->
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
         const sidebar = document.getElementById("sidebar");
         const toggleBtn = document.getElementById("toggleBtn");
@@ -188,40 +188,144 @@
             });
 
             alert("cargue");
-            document.getElementById("btnGuardarCancion").addEventListener("click", async (e) => {
-                e.preventDefault(); // evitar que el form recargue la página
+        
+    /* ---------------------------------------------------------
+        1. Conectar Supabase (Frontend)
+    --------------------------------------------------------- */
 
-                const nombre = document.getElementById("songName").value.trim();
-                const artista = document.getElementById("songartist").value.trim();
-                const duracion = document.getElementById("songDuration").value.trim();
-                const imagenInput = document.getElementById("songImage");
+    // Obtener createClient desde la librería cargada por CDN
+    const { createClient } = supabase;
 
-                if (!nombre || !artista || !duracion || !imagenInput.files[0]) {
-                    alert("Todos los campos son obligatorios.");
-                    return;
-                }
+    // Crear cliente correctamente
+    const supabaseClient = createClient(
+        "https://cbsuienlmpwujgnddxgj.supabase.co",
+        "sb_publishable_TmxE-kwg8MYXtq6ftPt1rA_WltUl1lZ"
+    );
 
-                const formData = new FormData();
-                formData.append("nombre", nombre);
-                formData.append("artista", artista);
-                formData.append("duracion", duracion);
-                formData.append("imagen", imagenInput.files[0]);
 
-                const respImagen = await fetch("/api/agregar-cancion", {
-                    method: "POST",
-                    body: formData
-                });
+    /* ---------------------------------------------------------
+        2. Guardar canción
+    --------------------------------------------------------- */
 
-                const data = await respImagen.json();
-                console.log("Respuesta del servidor:", data);
+    document.getElementById("btnGuardarCancion").addEventListener("click", async (event) => {
+        event.preventDefault();
 
-                if (data.success) {
-                    alert("Canción guardada correctamente 🎶");
-                    document.getElementById("songModal").style.display = "none";
-                } else {
-                    alert("Error al guardar la canción");
-                }
+        const nombre = document.getElementById("songName").value.trim();
+        const artista = document.getElementById("songartist").value.trim();
+        const duracion = document.getElementById("songDuration").value.trim();
+        const imagenFile = document.getElementById("songImage").files[0];
+        const modal = document.getElementById("songModal");
+
+        if (!nombre || !artista || !duracion || !imagenFile) {
+            alert("Todos los campos son obligatorios.");
+            return;
+        }
+
+        /* ---------- 2.1 Subir imagen a Supabase Storage ------------------ */
+        const fileName = `portadas/${Date.now()}-${imagenFile.name}`;
+
+        const { error: uploadError } = await supabaseClient.storage
+            .from("imagenes")
+            .upload(fileName, imagenFile);
+
+        if (uploadError) {
+            console.error(uploadError);
+            alert("Error subiendo la imagen.");
+            return;
+        }
+
+        /* ---------- 2.2 Obtener URL pública ------------------ */
+        const { data: publicData } = supabaseClient.storage
+            .from("imagenes")
+            .getPublicUrl(fileName);
+
+        const ruta = publicData.publicUrl;
+
+        /* ---------- 2.3 Insertar canción en la base ------------------ */
+        const { error: insertError } = await supabaseClient
+            .from("cancion")
+            .insert({
+                nombre,
+                artista,
+                duracion,
+                ruta
             });
+
+        if (insertError) {
+            console.error(insertError);
+            alert("Error guardando canción en la base de datos.");
+            return;
+        }
+
+        alert("🎵 Canción agregada correctamente!");
+
+        /* ---------- 2.4 Renderizar tarjeta nueva ------------------ */
+        renderSongCard({ nombre, artista, duracion, ruta });
+
+        /* ---------- 2.5 Limpiar formulario ------------------ */
+        document.getElementById("newSongForm").reset();
+
+        /* ---------- 2.6 Cerrar modal ------------------ */
+        modal.style.display = "none";
+    });
+
+
+    /* ---------------------------------------------------------
+        3. Renderizar tarjeta de canción
+    --------------------------------------------------------- */
+    function renderSongCard(cancion) {
+        const cardsGrid = document.querySelector(".grid");
+
+        if (!cardsGrid) {
+            console.error("No se encontró el contenedor de tarjetas (.grid)");
+            return;
+        }
+
+        const card = document.createElement("div");
+        card.className = "w-full h-64 perspective";
+
+        card.innerHTML = `
+            <div class="flipper" tabindex="0" role="button" 
+                onclick="this.classList.toggle('flipped')">
+
+                <div class="face front">
+                    <img src="${cancion.ruta}" 
+                        class="w-full h-full object-cover rounded-xl shadow-lg"
+                        alt="${cancion.nombre}">
+                </div>
+
+                <div class="face back bg-gray-900 text-white rounded-xl p-4 flex flex-col justify-start relative pt-6 shadow-lg">
+                    <h2 class="text-xl font-bold mb-2">🎵 ${cancion.nombre}</h2>
+                    <p class="text-sm mb-1"><strong>Artista:</strong> ${cancion.artista}</p>
+                    <p class="text-sm mb-1"><strong>Duración:</strong> ${cancion.duracion}</p>
+
+                    <button class="absolute bottom-3 right-3 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-xl">
+                        ▶
+                    </button>
+                </div>
+            </div>
+        `;
+
+        cardsGrid.appendChild(card);
+    }
+
+
+    /* ---------------------------------------------------------
+        4. Cargar canciones al iniciar la página
+    --------------------------------------------------------- */
+    document.addEventListener("DOMContentLoaded", async () => {
+        const { data: canciones, error } = await supabaseClient
+            .from("cancion")
+            .select("*");
+
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        canciones.forEach(c => renderSongCard(c));
+    });
+
     </script>
 </body>
 </html>
